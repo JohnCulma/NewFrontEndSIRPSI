@@ -1,0 +1,76 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="titulo">
+                            <h4>Modificar empresas</h4>
+                        </h5>
+
+                        <form>
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                                <i class="icofont icofont-fire-alt"
+                                    [class.green-icon]="this.form.get('documento')?.valid"
+                                    [class.red-icon]="this.form.get('documento')?.invalid && this.form.get('documento')?.touched"></i>
+                            </span>
+                                <input formControlName="documento" maxlength="16" type="text" class="form-control" placeholder="Nit">
+                            </div>
+
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-text">
+                              <i class="icofont icofont-ship-wheel"
+                             [class.green-icon]="this.form.get('digitoVerificacion')?.valid"
+                              [class.red-icon]="this.form.get('digitoVerificacion')?.invalid && this.form.get('digitoVerificacion')?.touched"></i> 
+                              </span>
+                                <input formControlName="digitoVerificacion" type="text" class="form-control" placeholder="Digito verificación">
+                            </div>
+
+
+                            <div class="d-grid gap-2">
+                                <button [disabled]="this.form.invalid" type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-database"></i>&nbsp; Aceptar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <tr *ngFor="let empre of listEmpresas">
+                                    <td>{{ empre.documento }}</td>
+                                    <td>{{ empre.digitoVerificacion }}</td>
+                                    <td>{{ empre.nombre }}</td>
+
+
+                                    <td>
+                                        <i (click)="editarEmpresa(empre)" class="icofont icofont-ui-edit text-info"></i>
+                                    </td>
+                                    <td>
+                                        <i (click)="eliminarEmpresa(empre.id)" class="icofont icofont-ui-delete text-danger"></i>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

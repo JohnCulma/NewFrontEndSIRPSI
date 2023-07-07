@@ -1,0 +1,12 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row" id="project">
+        <div class="col-sm-12">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active1" class="nav-tabs">
+
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
