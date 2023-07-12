@@ -1,0 +1,249 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Listado de empresas</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <table class="table">
+        <caption>Listado de empresas</caption>
+        <thead>
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col" sortable="name">Tipo documento</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Digito verificación</th>
+                <th scope="col">Tipo empresa</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Ministerio</th>
+                <th scope="col">Estado</th>
+                <th scope="col" colspan="3">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+
+            <tr *ngFor="let item of listEmpresas; let i = index">
+                <th scope="row">{{ i+1 }}</th>
+                <td scope="row">{{item.tipoDocNombre}}</td>
+                <td> {{item.documento}}</td>
+                <td> {{item.digitoVerificacion}} </td>
+                <td> {{item.tipoEmpNombre}}</td>
+                <td> {{item.nombre}}</td>
+                <td> {{item.ministerioNombre}} </td>
+                <td> {{item.estadoNombre}}</td>
+                <td><i (click)="onOpenModalSave(content)" class="fa fa-save"></i></td>
+                <td><i (click)="onOpenModalUpdate(Actualizar)" class="icofont icofont-ui-edit text-info"></i></td>
+                <td><i (click)="onDelete(item.id)" class="icofont icofont-ui-delete text-danger"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card-body">
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Guardar empresa</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+        </div>
+        <div class="modal-body">
+            <br/>
+            <div class="form-group">
+                <form class="row g-6">
+
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">T. documento</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #id class="form-select" aria-label="Default select example" (change)="onChangeIdTypoDoc(id.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let tiposDocs of listDocs" [value]="tiposDocs.id">{{tiposDocs.nombre}}</option>                                      
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Documento</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Documento" [ngModelOptions]="{standalone: true}" class="form-control" id="Documento" placeholder="Documento">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Digito verificación</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.DigitoVerificacion" [ngModelOptions]="{standalone: true}" class="form-control" id="DigitoVerificacion" placeholder="Digito verificación">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Nombre empresa</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Nombre" [ngModelOptions]="{standalone: true}" class="form-control" id="Nombre" placeholder="Nombre empresa">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Descripcion" [ngModelOptions]="{standalone: true}" class="form-control" id="Descripcion" placeholder="Descripción">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Tipo empresa</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #idTipoEmpresa class="form-select" aria-label="Default select example" (change)="onChangeTipoEmpresa(idTipoEmpresa.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let tipoEmpresa of listTipoEmpresa" [value]="tipoEmpresa.id">{{tipoEmpresa.nombre}}</option>
+                                  
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Ministerio</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #idMinisterio class="form-select" aria-label="Default select example" (change)="onChangeMinisterio(idMinisterio.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let ministerio of listMinisterios" [value]="ministerio.id">{{ministerio.nombre}}</option>
+                                  
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #idEstado class="form-select" aria-label="Default select example" (change)="onChangeEstado(idEstado.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let estado of estadosList" [value]="estado.id">{{estado.nombre}}</option>
+                                  
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Observacion</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Observacion" [ngModelOptions]="{standalone: true}" class="form-control" id="Observacion" placeholder="Observación">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Close click')">Cerrar</button>
+            <button type="button" class="btn btn-outline-primary" (click)="onSaveEmpresa()">Guardar</button>
+        </div>
+    </ng-template>
+    <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+    <hr>
+    <!-- <pre class="mb-0">Result : {{closeResult}}</pre> -->
+</div>
+
+<div class="card-body">
+    <ng-template #Actualizar let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Actualizar empresa</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+        </div>
+        <div class="modal-body">
+            <br/>
+            <div class="form-group">
+                <form class="row g-6">
+
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">T. documento</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #id class="form-select" aria-label="Default select example" (change)="onChangeIdTypoDoc(id.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let tiposDocs of listDocs" [value]="tiposDocs.id">{{tiposDocs.nombre}}</option>                                      
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Documento</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Documento" [ngModelOptions]="{standalone: true}" class="form-control" id="Documento" placeholder="Documento">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Digito verificación</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.DigitoVerificacion" [ngModelOptions]="{standalone: true}" class="form-control" id="DigitoVerificacion" placeholder="Digito verificación">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Nombre empresa</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Nombre" [ngModelOptions]="{standalone: true}" class="form-control" id="Nombre" placeholder="Nombre empresa">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Descripcion" [ngModelOptions]="{standalone: true}" class="form-control" id="Descripcion" placeholder="Descripción">
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Tipo empresa</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #idTipoEmpresa class="form-select" aria-label="Default select example" (change)="onChangeTipoEmpresa(idTipoEmpresa.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let tipoEmpresa of listTipoEmpresa" [value]="tipoEmpresa.id">{{tipoEmpresa.nombre}}</option>
+                                  
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Ministerio</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #idMinisterio class="form-select" aria-label="Default select example" (change)="onChangeMinisterio(idMinisterio.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let ministerio of listMinisterios" [value]="ministerio.id">{{ministerio.nombre}}</option>
+                                  
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <select name="" #idEstado class="form-select" aria-label="Default select example" (change)="onChangeEstado(idEstado.value)">
+                                    <option selected [value]="0">--Seleccionar--</option>
+                                    <option *ngFor = "let estado of estadosList" [value]="estado.id">{{estado.nombre}}</option>
+                                  
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Observacion</label>
+                        <div class="col-sm-10">
+                            <input type="text" [(ngModel)]="empresaModel.Observacion" [ngModelOptions]="{standalone: true}" class="form-control" id="Observacion" placeholder="Observación">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Close click')">Cerrar</button>
+            <button type="button" class="btn btn-outline-primary" (click)="onSaveEmpresa()">Guardar</button>
+        </div>
+    </ng-template>
+    <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+    <hr>
+    <!-- <pre class="mb-0">Result : {{closeResult}}</pre> -->
+</div>

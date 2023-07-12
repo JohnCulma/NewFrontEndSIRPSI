@@ -16,6 +16,12 @@ import { CookieService } from "ngx-cookie-service";
 import "hammerjs";
 import "mousetrap";
 import { UsuarioRolComponent } from "./pages/roles/usuario-rol/usuario-rol.component";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EmpresasModule } from './aplicaciones/empresas/empresas.module';
+import { MinisteriosModule } from './aplicaciones/ministerios/ministerios.module';
+import { CentrotrabajoModule } from './aplicaciones/centrotrabajo/centrotrabajo.module';
+
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, UsuarioRolComponent],
   imports: [
@@ -35,8 +41,15 @@ import { UsuarioRolComponent } from "./pages/roles/usuario-rol/usuario-rol.compo
         deps: [HttpClient],
       },
     }),
+    NgbModule,
+    EmpresasModule,
+    MinisteriosModule,
+    CentrotrabajoModule,  
   ],
   providers: [ AdminGuard, CookieService, DecimalPipe],
   bootstrap: [AppComponent],
+  exports: [
+
+  ],
 })
 export class AppModule {}

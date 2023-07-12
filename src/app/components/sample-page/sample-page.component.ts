@@ -32,12 +32,12 @@ export class SamplePageComponent implements OnInit {
   }
 
   obtenerEmpresas() {
-    this._EmpresaService.getListEmpresas().subscribe(data => {
-      console.log(data);
-      this.listEmpresas = data;
-    }, error => {
-      console.log(error);
-    })
+    // this._EmpresaService.getListEmpresas().subscribe(data => {
+    //   console.log(data);
+    //   this.listEmpresas = data;
+    // }, error => {
+    //   console.log(error);
+    // })
   }
 
   guardarEmpresa() {

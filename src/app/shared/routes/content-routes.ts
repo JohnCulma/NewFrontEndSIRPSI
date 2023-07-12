@@ -218,4 +218,33 @@ export const content: Routes = [
       breadcrumb: "Contact"
     }
   },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('../../aplicaciones/aplicaciones.module').then(m => m.AplicacionesModule),
+    data: {
+      breadcrumb: "Usuarios"
+    }
+  },
+  {
+    path: 'empresas',
+    loadChildren: () => import('../../aplicaciones/empresas/empresas.module').then(m => m.EmpresasModule),
+    data: {
+      breadcrumb: "Empresas"
+    }
+  },
+  {
+    path: 'centrosdetrabajo',
+    loadChildren: () => import('../../aplicaciones/centrotrabajo/centrotrabajo.module').then(m => m.CentrotrabajoModule),
+    data: {
+      breadcrumb: "Centros de trabajo"
+    }
+  },
+  {
+    path: 'ministerios',
+    loadChildren: () => import('../../aplicaciones/ministerios/ministerios.module').then(m => m.MinisteriosModule),
+    data: {
+      breadcrumb: "Ministerios"
+    }
+  },
+ 
 ];

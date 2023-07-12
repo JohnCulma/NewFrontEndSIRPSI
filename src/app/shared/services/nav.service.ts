@@ -39,21 +39,37 @@ export class NavService {
 
 	MENUITEMS: Menu[] = [
 		{
-			title: 'Usuarios', icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '#', title: 'Información', type: 'link' }
+			title: 'Usuarios', icon: 'unlock', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: 'usuarios', title: 'Modificar usuarios', type: 'link' }
 			]
 		},
 		{
 			title: 'Empresas', icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: 'sample-page', title: 'Información', type: 'link' },
-				{ path: '#', title: 'Centros de trabajo', type: 'link' }
+				{ path: 'empresas', title: 'Modificar empresas', type: 'link' },
+				{ path: 'centrosdetrabajo', title: 'Centros de trabajo', type: 'link' }		
 			]
 		},
 		{
-			title: 'Ministerios', icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '#', title: 'Información', type: 'link' }
+			title: 'Ministerios', icon: 'airplay', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: 'ministerios', title: 'Modificar ministerios', type: 'link' }
 			]
 		},
+		// {
+		// 	title: 'Tables', icon: 'server', type: 'sub', active: false, children: [
+		// 		{
+		// 			title: 'Bootstrap Tables', type: 'sub', active: false, children: [
+		// 				{ path: '/table/basic', title: 'Basic Table', type: 'link' },
+		// 				{ path: '/table/sizing', title: 'Sizing Table', type: 'link' },
+		// 				{ path: '/table/border', title: 'Border Table', type: 'link' },
+		// 				{ path: '/table/styling', title: 'Styling Table', type: 'link' }
+		// 			]
+		// 		},
+		// 		{
+		// 			title: 'Ngx-Datatables', type: 'sub', active: false, children: [
+		// 				{ path: '/table/ngx-datatables/basic', title: 'Basic Table', type: 'link' },
+		// 			]
+		// 		}]
+		// },
 		// {
 		// 	title: 'Dashboard', icon: 'home', type: 'sub', badgeType: 'primary', badgeValue: 'new', active: false, children: [
 		// 		{ path: '/dashboard/default', title: 'Default', type: 'link' },
@@ -160,16 +176,16 @@ export class NavService {
 		// 	]
 		// },
 
-		// {
-		// 	title: 'Tables', icon: 'server', type: 'sub', active: false, children: [
-		// 		{
-		// 			title: 'Bootstrap Tables', type: 'sub', active: false, children: [
-		// 				{ path: '/table/basic', title: 'Basic Table', type: 'link' },
-		// 				{ path: '/table/sizing', title: 'Sizing Table', type: 'link' },
-		// 				{ path: '/table/border', title: 'Border Table', type: 'link' },
-		// 				{ path: '/table/styling', title: 'Styling Table', type: 'link' }
-		// 			]
-		// 		},
+			// {
+			// title: 'Tables', icon: 'server', type: 'sub', active: false, children: [
+			// 	{
+			// 		title: 'Bootstrap Tables', type: 'sub', active: false, children: [
+			// 			{ path: '/table/basic', title: 'Basic Table', type: 'link' },
+			// 			{ path: '/table/sizing', title: 'Sizing Table', type: 'link' },
+			// 			{ path: '/table/border', title: 'Border Table', type: 'link' },
+			// 			{ path: '/table/styling', title: 'Styling Table', type: 'link' }
+			// 		]
+			// 	},
 		// 		{
 		// 			title: 'Ngx-Datatables', type: 'sub', active: false, children: [
 		// 				{ path: '/table/ngx-datatables/basic', title: 'Basic Table', type: 'link' },

@@ -8,7 +8,7 @@ import { full } from "./shared/routes/full.routes";
 import { AdminGuard } from "./shared/guard/admin.guard";
 import { UsuarioRolComponent } from './pages/roles/usuario-rol/usuario-rol.component';
 import { isAutheticatedGuard } from "./guards/is-autheticated.guard";
-import { EmpresaComponent } from './shared/components/empresa/empresa.component';
+
 const routes: Routes = [
     {
     path: "",
@@ -28,11 +28,6 @@ const routes: Routes = [
     path: "roles/usuario",
     // canActivate: [isAutheticatedGuard],
     component: UsuarioRolComponent,
-  },
-  {
-    path: "empresa/informacion",
-    // canActivate: [isAutheticatedGuard],
-    component: EmpresaComponent,
   },
   {
     path: "",

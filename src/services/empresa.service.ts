@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Empresa } from 'src/app/interface/empresa.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,18 @@ export class EmpresaService {
   private http = inject( HttpClient );
 
   constructor() { }
-  
 
-  getListEmpresas(): Observable<any>{
+  getListEmpresasUsuario(): Observable<any[]>{
+    const urlGetEmpresa = `${this.baseUrl}/empresas/ConsultarEmpresas`;
+    const token = localStorage.getItem('token');
+    
+    const headers = new HttpHeaders()
+    .set('Authorization', `Bearer  ${token}`);
+  
+   return this.http.get<any>(urlGetEmpresa,  { headers } );
+  }
+
+  getEmpresas(): Observable<any>{
     const urlGetEmpresa = `${this.baseUrl}/empresas/ConsultarEmpresas`;
     const token = localStorage.getItem('token');
     
@@ -28,18 +38,21 @@ export class EmpresaService {
     const urlDeleteEmpresa = `${this.baseUrl}/empresas/EliminarEmpresa`;
     const token = localStorage.getItem('token');
     
-    const headers = new HttpHeaders()
-    .set('Authorization', `Bearer  ${token}`);
-    return this.http.delete(urlDeleteEmpresa, { headers } );
+    return this.http.delete(urlDeleteEmpresa, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer  ${token}`
+      }),
+       body: { "Id": id }
+        });
   }
 
-  saveEmpresa(emprsa: any): Observable<any> {
-    const urlSaveEmpresa = `${this.baseUrl}/empresas/EliminarEmpresa`;
+  saveEmpresa(empresa: Empresa): Observable<any> {
+    const urlSaveEmpresa = `${this.baseUrl}/empresas/RegistrarEmpresa`;
     const token = localStorage.getItem('token');
     
     const headers = new HttpHeaders()
     .set('Authorization', `Bearer  ${token}`);
-    return this.http.post(urlSaveEmpresa, { headers } );
+    return this.http.post(urlSaveEmpresa, empresa, { headers } );
   }
 
   updateEmpresa(id: string, empresa: any): Observable<any> {

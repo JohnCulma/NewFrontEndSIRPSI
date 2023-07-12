@@ -29,6 +29,28 @@ export class RolService {
           return estado;
 };
 
+getRoles(): Observable<any[]>{
+  // const urlEstado = `${this.baseUrl}/estados/ConsultarEstados`;
+  const token = localStorage.getItem('token');
+  
+  const headers = new HttpHeaders()
+  .set('Authorization', `Bearer  ${token}`);
+
+  // return this.http.get(urlEstado,  { headers } ).subscribe(data => 
+  // console.log(data)      
+  // );
+  const urlRol = `${this.baseUrl}/roles/ConsultarRoles`;
+  return this.http.get<any>(urlRol,  { headers });
+  // pipe(
+  //   map( ({estados}) => this.setRol(estados)),
+  //   catchError(err => {
+  //     console.log(err);
+  //       return throwError(() => err.error.message)
+  //   } )
+  // );
+
+}
+
   rolContent(): Observable<any[]>{
     // const urlEstado = `${this.baseUrl}/estados/ConsultarEstados`;
     const token = localStorage.getItem('token');
@@ -39,6 +61,7 @@ export class RolService {
     // return this.http.get(urlEstado,  { headers } ).subscribe(data => 
     // console.log(data)      
     // );
+    debugger
     const urlRol = `${this.baseUrl}/rolesusuario/ConsultarRolesUsuario`;
     return this.http.get<any>(urlRol,  { headers });
     // pipe(

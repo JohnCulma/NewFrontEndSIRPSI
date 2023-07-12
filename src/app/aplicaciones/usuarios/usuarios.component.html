@@ -1,0 +1,288 @@
+<!-- Container-fluid starts -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Listado de usuarios</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <caption>Listado de usuarios</caption>
+            <thead>
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col" sortable="name">Tipo documento</th>
+                    <th scope="col">Cédula</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col" colspan="3">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+
+                <tr *ngFor="let item of listUsuario; let i = index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <td scope="row">{{item.nombreTipoDocumento}}</td>
+                    <td> {{item.cedula}}</td>
+                    <td> {{item.correo}} </td>
+                    <td> {{item.telefono}}</td>
+                    <td> {{item.nombreEmpresa}}</td>
+                    <td> {{item.nombreUsuario}} </td>
+                    <td> {{item.apellidosUsuario}}</td>
+                    <td> {{item.nombreEstado}}</td>
+                    <td><i (click)="onOpenModalSave(content)" class="fa fa-save"></i></td>
+                    <td><i (click)="onUpdate(prueba)" class="icofont icofont-ui-edit text-info"></i></td>
+                    <td><i (click)="onDelete(item.id)" class="icofont icofont-ui-delete text-danger"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-body">
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Guardar usuario</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+            </div>
+            <div class="modal-body">
+                <br/>
+                <div class="form-group">
+                    <form class="row g-6" [formGroup]="formSaveUsuario">
+
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">T. documento</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #id class="form-select" aria-label="Default select example" (change)="onChangeIdTypoDoc(id.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option *ngFor = "let tiposDocs of listDocs" [value]="tiposDocs.id">{{tiposDocs.nombre}}</option>                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Cédula</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Document" [ngModelOptions]="{standalone: true}" class="form-control" id="Document" placeholder="Cédula">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Nombres</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Names" [ngModelOptions]="{standalone: true}" class="form-control" id="Names" placeholder="Nombres">
+                            </div>
+                        </div>
+
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Apellidos</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Surnames" [ngModelOptions]="{standalone: true}" class="form-control" id="Surnames" placeholder="Apellidos">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" [(ngModel)]="usuarioModel.Password" [ngModelOptions]="{standalone: true}" class="form-control" id="Password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Correo</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Email" [ngModelOptions]="{standalone: true}" class="form-control" id="Email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.PhoneNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="PhoneNumber" placeholder="Teléfono">
+                            </div>
+                        </div>
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Rol</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idRol class="form-select" aria-label="Default select example" (change)="onChangeRol(idRol.value)">
+                                        <option selected>--Seleccionar--</option>
+                                        <option *ngFor = "let rol of listRoles" [value]="rol.id">{{rol.name}}</option>
+                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">País</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idPais class="form-select" aria-label="Default select example" (change)="onChangePais(idPais.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option  *ngFor = "let pais of listPaises" [value]="pais.id">{{pais.nombre}}</option>                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Empresa</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idEmpresa class="form-select" aria-label="Default select example" (change)="onChangeEmpresa(idEmpresa.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option *ngFor = "let empresa of listEmpresas" [value]="empresa.id">{{empresa.nombre}}</option>
+                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idEstado class="form-select" aria-label="Default select example" (change)="onChangeEstado(idEstado.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option *ngFor = "let estado of estadosList" [value]="estado.id">{{estado.nombre}}</option>
+                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Close click')">Close</button>
+                <button type="button" class="btn btn-outline-primary" (click)="onSave()">Save</button>
+            </div>
+        </ng-template>
+        <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+        <hr>
+        <!-- <pre class="mb-0">Result : {{closeResult}}</pre> -->
+    </div>
+
+    <div class="card-body">
+        <ng-template #prueba let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Actualizar usuario</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+            </div>
+            <div class="modal-body">
+                <br/>
+                <div class="form-group">
+                    <form class="row g-6" [formGroup]="formSaveUsuario">
+
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">T. documento</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #id class="form-select" aria-label="Default select example" (change)="onChangeIdTypoDoc(id.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option *ngFor = "let tiposDocs of listDocs" [value]="tiposDocs.id">{{tiposDocs.nombre}}</option>                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Cédula</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Document" [ngModelOptions]="{standalone: true}" class="form-control" id="Document" placeholder="Cédula">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Nombres</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Names" [ngModelOptions]="{standalone: true}" class="form-control" id="Names" placeholder="Nombres">
+                            </div>
+                        </div>
+
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Apellidos</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Surnames" [ngModelOptions]="{standalone: true}" class="form-control" id="Surnames" placeholder="Apellidos">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" [(ngModel)]="usuarioModel.Password" [ngModelOptions]="{standalone: true}" class="form-control" id="Password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Correo</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.Email" [ngModelOptions]="{standalone: true}" class="form-control" id="Email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Teléfono</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="usuarioModel.PhoneNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="PhoneNumber" placeholder="Teléfono">
+                            </div>
+                        </div>
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Rol</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idRol class="form-select" aria-label="Default select example" (change)="onChangeRol(idRol.value)">
+                                        <option selected>--Seleccionar--</option>
+                                        <option *ngFor = "let rol of listRoles" [value]="rol.id">{{rol.name}}</option>
+                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">País</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idPais class="form-select" aria-label="Default select example" (change)="onChangePais(idPais.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option  *ngFor = "let pais of listPaises" [value]="pais.id">{{pais.nombre}}</option>                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Empresa</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idEmpresa class="form-select" aria-label="Default select example" (change)="onChangeEmpresa(idEmpresa.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option *ngFor = "let empresa of listEmpresas" [value]="empresa.id">{{empresa.nombre}}</option>
+                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Estado</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <select name="" #idEstado class="form-select" aria-label="Default select example" (change)="onChangeEstado(idEstado.value)">
+                                        <option selected [value]="0">--Seleccionar--</option>
+                                        <option *ngFor = "let estado of estadosList" [value]="estado.id">{{estado.nombre}}</option>                                      
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Close click')">Close</button>
+                <button type="button" class="btn btn-outline-primary" (click)="onSave()">Save</button>
+            </div>
+        </ng-template>
+        <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+        <hr>
+        <!-- <pre class="mb-0">Result : {{closeResult}}</pre> -->
+    </div>
+</div>
+<!-- Container-fluid Ends -->

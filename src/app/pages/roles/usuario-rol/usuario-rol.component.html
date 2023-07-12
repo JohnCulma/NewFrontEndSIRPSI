@@ -9,11 +9,11 @@
                             <h1>SIRPSI</h1>
                         </div>
                         <div class="card mt-4 p-4 mb-0">
-                            <form class="theme-form" [formGroup]="formRol" (ngSubmit)="on()">
+                            <form class="theme-form" (ngSubmit)="on(idRolSelect.value)">
                                 <div class="form-group">
                                     <label class="col-form-label">Seleccione su rol</label>
-                                    <select name="" class="form-select" aria-label="Default select example">
-                                        <option selected>--Seleccionar--</option>
+                                    <select name="" #idRolSelect class="form-select" aria-label="Default select example">
+                                        <option selected [value]="0">--Seleccionar--</option>
                                         <option *ngFor = "let res of rolesList" [value]="res.roleId">{{res.name}}</option>
                                       
                                       </select>

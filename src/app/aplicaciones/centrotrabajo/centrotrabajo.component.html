@@ -1,0 +1,46 @@
+<!-- Container-fluid starts -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Listado centros de trabajo</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <caption>Listado centros de trabajo</caption>
+            <thead>
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col" sortable="name">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Digito verificación</th>
+                    <th scope="col">Tipo empresa</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Ministerio</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col" colspan="3">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+
+                <tr *ngFor="let item of listCetroTrabajo; let i = index">
+                    <th scope="row">{{ i+1 }}</th>
+                    <!-- <td scope="row">{{item.tipoDocNombre}}</td>
+                    <td> {{item.documento}}</td>
+                    <td> {{item.digitoVerificacion}} </td>
+                    <td> {{item.tipoEmpNombre}}</td>
+                    <td> {{item.nombre}}</td>
+                    <td> {{item.ministerioNombre}} </td>
+                    <td> {{item.estadoNombre}}</td> -->
+                    <!-- <td><i (click)="onOpenModalSave(content)" class="fa fa-save"></i></td>
+                    <td><i (click)="onOpenModalUpdate(Actualizar)" class="icofont icofont-ui-edit text-info"></i></td>
+                    <td><i (click)="onDelete(item.id)" class="icofont icofont-ui-delete text-danger"></i></td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
